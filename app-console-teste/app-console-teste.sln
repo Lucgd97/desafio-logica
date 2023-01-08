@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app-console-teste", "app-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercicio-log-1", "exercicio-log-1\exercicio-log-1.csproj", "{24EEFA73-4C40-4C8F-8FC3-4900F6C7E83E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercicio-log-2", "exercicio-log-2\exercicio-log-2.csproj", "{2445AB5F-E2CF-484C-AAFD-F03079A8ABA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{24EEFA73-4C40-4C8F-8FC3-4900F6C7E83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24EEFA73-4C40-4C8F-8FC3-4900F6C7E83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24EEFA73-4C40-4C8F-8FC3-4900F6C7E83E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2445AB5F-E2CF-484C-AAFD-F03079A8ABA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2445AB5F-E2CF-484C-AAFD-F03079A8ABA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2445AB5F-E2CF-484C-AAFD-F03079A8ABA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2445AB5F-E2CF-484C-AAFD-F03079A8ABA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

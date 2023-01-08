@@ -1,7 +1,7 @@
 ﻿
 //Minha resolução desafio 1
 
-//Console.WriteLine("=== Bem vindo ao sistema de Cadastro de nome e Sobrenome (1.0) ==="); 
+//Console.WriteLine("=== Bem vindo ao sistema de Cadastro de nome e Sobrenome V(1.0) ==="); 
 //Console.WriteLine("========================================="); 
 
 //Console.WriteLine("Digite 3 Nomes:"); 
@@ -27,7 +27,7 @@
 
 
 // Correção e melhorias da aula ao vivo
-Console.WriteLine("=== Bem vindo ao sistema de Cadastro de Nome e Sobrenome (2.0) ===");
+Console.WriteLine("=== Bem vindo ao sistema de Cadastro de Nome e Sobrenome V(2.0) ===");
 
 
 Console.WriteLine("Digite o primeiro nome:");
