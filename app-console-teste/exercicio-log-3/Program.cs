@@ -49,12 +49,12 @@ se n tchau
 //    """);
 //var escolha = Convert.ToInt16((Console.ReadLine()));
 
-//if(escolha == 1)
+//if (escolha == 1)
 //{
 //    Console.WriteLine("Qual valor desaja sacar?");
-//        var saque = Convert.ToDouble((Console.ReadLine()));
+//    var saque = Convert.ToDouble((Console.ReadLine()));
 
-//    if(saque <= valorComTaxa)
+//    if (saque <= valorComTaxa)
 //    {
 //        valorComTaxa -= saque;
 //        Console.WriteLine($"Saque realizado com sucesso, saldo atual R${valorComTaxa}");
@@ -88,9 +88,11 @@ Console.WriteLine($"""
     Deseja realizar um saque?
     Digite: S para Sim / N para Não
     """);
-var escolha = Convert.ToString((Console.ReadLine()));
 
-if (escolha == 'S')
+string escolha = Console.ReadLine();
+
+
+if (escolha == "s")
 {
     Console.WriteLine("Qual valor desaja sacar?");
     var saque = Convert.ToDouble((Console.ReadLine()));
@@ -109,3 +111,4 @@ else
 {
     Console.WriteLine("Obrigado por utilizar os serviços do PayBank");
 }
+
