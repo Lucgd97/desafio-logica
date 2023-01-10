@@ -91,7 +91,6 @@ Console.WriteLine($"""
 
 string escolha = Console.ReadLine();
 
-
 if (escolha == "s")
 {
     Console.WriteLine("Qual valor desaja sacar?");
