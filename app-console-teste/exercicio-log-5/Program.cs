@@ -152,6 +152,7 @@
 //}
 
 using System;
+using System.ComponentModel;
 
 List<string[]> list = new List<string[]>();
 
@@ -179,29 +180,7 @@ while (true)
         case "1":
             Console.Clear();
 
-            var id = Guid.NewGuid();
-            
-                Console.Write("Olá Cliente, digite seu nome: \n");
-                var nome = Console.ReadLine();
-
-                Console.Write($"Olá {nome}, digite seu telefone: Ex (00) 00000 0000 \n");
-                var telefone = Console.ReadLine();
-
-                Console.Write("Digite seu email: \n");
-                var email = Console.ReadLine();
-
-            string[] cliente = { };
-
-            cliente.Append(id.ToString());
-            cliente.Append(nome);
-            cliente.Append(email);
-            cliente.Append(telefone);
-
-                Console.WriteLine("\n==== Bem vindo a Empresa Lina ====");
-                Console.WriteLine(nome);
-                Console.WriteLine(telefone);
-                Console.WriteLine(email);
-                Console.WriteLine(id);
+            cadastrarCliente();
 
             break;
         case "2":
@@ -239,7 +218,37 @@ while (true)
             break;
     }
 
+    void cadastrarCliente()
+    {
+        var id = Guid.NewGuid();
+
+        Console.Write("Olá Cliente, digite seu nome: \n");
+        var nome = Console.ReadLine();
+
+        Console.Write($"Olá {nome}, digite seu telefone: Ex (00) 00000 0000 \n");
+        var telefone = Console.ReadLine();
+
+        Console.Write("Digite seu email: \n");
+        var email = Console.ReadLine();
+
+        string[] cliente = new string[4];
+
+        cliente[0] = id.ToString();
+        cliente[1] = nome != null ? nome : "[Sem Nome]";
+        cliente[2] = telefone != null ? telefone : "[Sem Telefone ]";
+        cliente[3] = email != null ? email : "[Sem Email]";
+
+        mensagem($"""Cliente {id} - {nome} cadastrado com sucesso.""");
+    }
+
     if (sair) break;
 
     Thread.Sleep(4000);
+}
+
+void mensagem(string msg)
+{
+    Console.Clear();
+    Console.WriteLine(msg);
+    Thread.Sleep(2000);
 }
