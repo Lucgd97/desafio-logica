@@ -179,28 +179,20 @@ while (true)
     {
         case "1":
             Console.Clear();
-
             cadastrarCliente();
-
+            
             break;
         case "2":
-            //  Console.WriteLine($"Olá, digite o valor que irá depositar em R$:");
-            //  double saldo = Convert.ToDouble(Console.ReadLine());
 
-
-            // Console.WriteLine("======== Saldo inicial ========");
-            // Console.WriteLine($"saldo depositado em r$: {saldo} reais.");
-
-            //Console.Clear();
+            Console.Clear();
+            cadastrarSaldo();
+            
             break;
 
         case "3":
-            //   Console.WriteLine($"""
-            //    Deseja realizar um Crédito?
-            //     Digite: S para Sim / N para Não
-            //     """);
-
+            
             Console.Clear();
+            credito();
 
             break;
         case "4":
@@ -231,12 +223,14 @@ while (true)
         Console.Write("Digite seu email: \n");
         var email = Console.ReadLine();
 
+        
         string[] cliente = new string[4];
 
         cliente[0] = id.ToString();
         cliente[1] = nome != null ? nome : "[Sem Nome]";
         cliente[2] = telefone != null ? telefone : "[Sem Telefone ]";
         cliente[3] = email != null ? email : "[Sem Email]";
+        
 
         mensagem($"""Cliente {id} - {nome} cadastrado com sucesso.""");
     }
@@ -245,6 +239,27 @@ while (true)
 
     Thread.Sleep(4000);
 }
+
+void cadastrarSaldo()
+{
+    Console.WriteLine($"Olá, digite o valor que irá depositar em R$:");
+    double saldo = Convert.ToDouble(Console.ReadLine());
+
+    double[] deposito = new double[1];
+
+    deposito[0] = saldo;
+
+    Console.WriteLine($"Seu saldo é de R$: {saldo}");
+    
+}
+
+
+void credito()
+{
+   foreach(double valorDeposito in saldo)
+    Console.WriteLine($"Seu valor em conta é de R$: {saldo}");
+}
+
 
 void mensagem(string msg)
 {
