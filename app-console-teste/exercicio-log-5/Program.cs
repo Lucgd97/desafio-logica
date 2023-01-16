@@ -271,7 +271,7 @@
 using System;
 using System.ComponentModel;
 
-List<string[]> list = new List<string[]>();
+List<string[]> lista = new List<string[]>();
 
 while (true)
 {
@@ -285,6 +285,7 @@ while (true)
     3 - Fazer Crebito em conta
     4 - Fazer Dedito em conta
     5 - Sair do Sistema
+    6 - Mostrar Clientes
     """);
 
     var opcao = Console.ReadLine()?.Trim();
@@ -309,6 +310,7 @@ while (true)
         case "3":
 
             Console.Clear();
+            adicionarCreditoCliente();
             
 
             break;
@@ -322,9 +324,38 @@ while (true)
         case "5":
             sair = true;
             break;
+        case "6":
+            mostrarCLientes();
+            break;
         default:
             Console.WriteLine("Opção inválida");
             break;
+    }
+
+
+    void listarClientesCadastrados()
+    {
+        mostrarCLientes(false, 0, "===== Selecione um cliente da lista =====");
+    }
+
+    void mostrarCLientes(bool sleep = true, int timerSleep = 2000, string header = "===== Lista de Clientes =====" )
+    {
+        Console.Clear();
+        Console.WriteLine(header);
+        foreach(var cliente in lista)
+        {
+            Console.WriteLine("Id" + cliente[0]);
+            Console.WriteLine("Nome:" + cliente[1]);
+            Console.WriteLine("Telefone" + cliente[2]);
+            Console.WriteLine("Email" + cliente[3]);
+
+            if (sleep)
+            {
+                Thread.Sleep(timerSleep);
+                Console.Clear();
+            }
+
+        }
     }
 
     void cadastrarCliente()
@@ -361,16 +392,23 @@ void adicionarCreditoCliente()
 {
     Console.Clear();
 
-    listarClientesCadastrados();
-
-    var nomeCLienteCredito = Console.ReadLine();
+    var cliente = capturaCliente();
 
     foreach(var cliente in lista)
     {
+        if (cliente[0] == idCliente)
+        {
 
+        }
     }
 }
 
+string[] capturaCliente()
+{
+    listarClientesCadastrados();
+
+    var idCliente = Console.ReadLine()?.Trim();
+}
 
 void mensagem(string msg)
 {
