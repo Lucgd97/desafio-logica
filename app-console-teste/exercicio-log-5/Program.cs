@@ -350,8 +350,10 @@ void mostrarContaCorrente()
 
 void listarClientesCadastrados()
 {
-    void mensagem(string msg);
-    Thread.Sleep(1500);
+    if(lista.Count == 0)
+    {
+        menuCadastraClienteSeNaoExiste();
+    }
 }
 
 void fazendoDebitoCliente()
@@ -379,7 +381,8 @@ void fazendoDebitoCliente()
 
 void adicionarCreditoCliente()
 {
-    void adicionarCreditoCliente();
+    Console.Clear();
+    var cliente = capturaCliente();
     Console.Clear();
     Console.WriteLine("Digite o valor do crédito:");
     double credito = Convert.ToDouble(Console.ReadLine());
@@ -391,7 +394,11 @@ void adicionarCreditoCliente()
 
     contaCorrete.Add(creditoConta);
 
-    void adicionarCreditoCliente();
+    var idCliente = cliente[0];
+    mensagem($"""
+        Credito adicionado com suceso...
+        Saldo do cliente {cliente[1]} é de R$ {saldoCliente(idCliente)}
+        """);
     
 }
 
