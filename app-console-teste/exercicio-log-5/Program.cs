@@ -268,11 +268,13 @@
 //    Thread.Sleep(2000);
 //}
 
-List<string[]> lista = new List<string[]>();
-List<string[]> contaCorrete = new List<string[]>();
+List<dynamic> listaDeClientes = new List<dynamic>();
+List<dynamic> contaCorrete = new List<dynamic>();
+
 while (true)
 {
     Console.Clear();
+
     Console.WriteLine("""
     =================[Seja bem-vindo à empresa Lina]=================
     O que você deseja fazer?
@@ -282,47 +284,47 @@ while (true)
     4 - Retirada
     5 - Sair do sistema
     """);
-    
+
     var opcao = Console.ReadLine()?.Trim();
     Console.Clear();
     bool sair = false;
+
     switch (opcao)
     {
         case "1":
             Console.Clear();
             cadastrarCliente();
-    break;
+            break;
         case "2":
             Console.Clear();
             mostrarContaCorrente();
-    break;
+            break;
         case "3":
             Console.Clear();
             adicionarCreditoCliente();
-    break;
+            break;
         case "4":
             Console.Clear();
             fazendoDebitoCliente();
-    break;
+            break;
         case "5":
             sair = true;
-    break;
-    default:
+            break;
+        default:
             Console.WriteLine("Opção inválida");
-    break;
-}
+            break;
+    }
 
     if (sair) break;
-    Thread.Sleep(4000);
 }
 
 void mostrarContaCorrente()
 {
     Console.Clear();
 
-    if (lista.Count == 0 || contaCorrete.Count == 0)
+    if (listaDeClientes.Count == 0 || contaCorrete.Count == 0)
     {
-        mensagem("Não existe clientes ou não existe movimentações em conta corrente, cadastre o cliente e faça crédito em conta");
+        mensagem("Não existe clientes ou não existe movimentações em conta correte, cadastre o cliente e faça crédito em conta");
         return;
     }
 
@@ -350,10 +352,77 @@ void mostrarContaCorrente()
 
 void listarClientesCadastrados()
 {
-    if(lista.Count == 0)
+    if (listaDeClientes.Count == 0)
     {
         menuCadastraClienteSeNaoExiste();
     }
+
+    mostrarClientes(false, 0, "===============[ Selecione um cliente da lista ]===================");
+}
+
+void mostrarClientes(
+    bool sleep = true,
+    int timerSleep = 2000,
+    string header = "===============[ Lista de clientes ]===================")
+{
+    Console.Clear();
+    Console.WriteLine(header);
+
+    foreach (var cliente in listaDeClientes)
+    {
+        Console.WriteLine("Id:" + cliente[0]);
+        Console.WriteLine("Nome:" + cliente[1]);
+        Console.WriteLine("Telefone:" + cliente[2]);
+        Console.WriteLine("Email:" + cliente[3]);
+        Console.WriteLine("----------------------------");
+
+        if (sleep)
+        {
+            Thread.Sleep(timerSleep);
+            Console.Clear();
+        }
+    }
+}
+
+void cadastrarCliente()
+{
+    var id = Guid.NewGuid().ToString();
+
+    Console.WriteLine("Informe o nome do cliente:");
+    var nomeCliente = Console.ReadLine();
+
+    Console.WriteLine($"Informe o telefone do cliente {nomeCliente}: ");
+    var telefone = Console.ReadLine();
+
+    Console.WriteLine($"Informe o email do cliente {nomeCliente}: ");
+    var email = Console.ReadLine();
+
+    if (listaDeClientes.Count > 0)
+    {
+        var cli = listaDeClientes.Find(c => c.Telefone == telefone);
+        if (cli != null)
+        {
+            mensagem($"Cliente já cadastrado com este telefone {telefone}, cadastre novamente");
+            cadastrarCliente();
+        }
+    }
+
+    listaDeClientes.Add(new
+    {
+        Id = id,
+        Nome = nomeCliente ?? "[Sem Nome]",
+        Telefone = telefone != null ? telefone : "[Sem Telefone]",
+        Email = email ?? "[Sem Email]"
+    });
+
+    mensagem($""" {nomeCliente} cadastrado com sucesso. """);
+}
+
+void mensagem(string msg)
+{
+    Console.Clear();
+    Console.WriteLine(msg);
+    Thread.Sleep(1500);
 }
 
 void fazendoDebitoCliente()
@@ -396,10 +465,9 @@ void adicionarCreditoCliente()
 
     var idCliente = cliente[0];
     mensagem($"""
-        Credito adicionado com suceso...
-        Saldo do cliente {cliente[1]} é de R$ {saldoCliente(idCliente)}
-        """);
-    
+    Credito adicionado com sucesso ...
+    Saldo do cliente {cliente[1]} é de R$ {saldoCliente(idCliente)}
+    """);
 }
 
 
@@ -424,7 +492,7 @@ string[] capturaCliente()
     listarClientesCadastrados();
     Console.WriteLine("Digite o ID do cliente");
     var idCliente = Console.ReadLine()?.Trim();
-    string[]? cliente = lista.Find(c => c[0] == idCliente);
+    string[]? cliente = listaDeClientes.Find(c => c[0] == idCliente);
 
     if (cliente == null)
     {
@@ -432,10 +500,13 @@ string[] capturaCliente()
         Console.Clear();
 
         menuCadastraClienteSeNaoExiste();
+
         return capturaCliente();
     }
+
     return cliente;
 }
+
 void menuCadastraClienteSeNaoExiste()
 {
     Console.WriteLine("""
@@ -444,7 +515,9 @@ void menuCadastraClienteSeNaoExiste()
         2 - Voltar ao menu
         3 - Sair do programa
         """);
+
     var opcao = Console.ReadLine()?.Trim();
+
     switch (opcao)
     {
         case "1":
@@ -459,38 +532,4 @@ void menuCadastraClienteSeNaoExiste()
             Console.WriteLine("Opção inválida");
             break;
     }
-}
-
-void cadastrarCliente()
-{
-    var id = Guid.NewGuid();
-
-    Console.Write("Olá Cliente, digite seu nome: \n");
-    var nome = Console.ReadLine();
-
-    Console.Write($"Olá {nome}, digite seu telefone: Ex (00) 00000 0000 \n");
-    var telefone = Console.ReadLine();
-
-    Console.Write("Digite seu email: \n");
-    var email = Console.ReadLine();
-
-
-    string[] cliente = new string[4];
-
-    cliente[0] = id.ToString();
-    cliente[1] = nome != null ? nome : "[Sem Nome]";
-    cliente[2] = telefone != null ? telefone : "[Sem Telefone ]";
-    cliente[3] = email != null ? email : "[Sem Email]";
-
-
-    mensagem($"""Cliente {id} - {nome} cadastrado com sucesso.""");
-}
-
-
-
-void mensagem(string msg)
-{
-    Console.Clear();
-    Console.WriteLine(msg);
-    Thread.Sleep(2000);
 }
