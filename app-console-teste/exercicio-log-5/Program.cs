@@ -268,6 +268,8 @@
 //    Thread.Sleep(2000);
 //}
 
+using System.Runtime.CompilerServices;
+
 List<dynamic> listaDeClientes = new List<dynamic>();
 List<dynamic> contaCorrete = new List<dynamic>();
 
@@ -330,19 +332,19 @@ void mostrarContaCorrente()
 
     var cliente = capturaCliente();
 
-    var contaCorrenteCliente = extratoCliente(cliente[0]);
+    var contaCorrenteCliente = extratoCliente(cliente.Id);
     Console.Clear();
     Console.WriteLine("----------------------");
     foreach (var contaCorrente in contaCorrenteCliente)
     {
-        Console.WriteLine("Data: " + contaCorrente[2]);
-        Console.WriteLine("Valor: " + contaCorrente[1]);
+        Console.WriteLine("Data: " + contaCorrente.Data.ToString("dd/MM/yyyy HH:mm:ss"));
+        Console.WriteLine("Valor: " + contaCorrente.Valor);
         Console.WriteLine("----------------------");
     }
 
     Console.WriteLine($"""
-    O valor total da conta do cliente {cliente[1]} é de:
-    R$ {saldoCliente(cliente[0], contaCorrenteCliente)}
+    O valor total da conta do cliente {cliente.Nome} é de:
+    R$ {saldoCliente(cliente.Id, contaCorrenteCliente)}
     """);
 
 
@@ -370,10 +372,10 @@ void mostrarClientes(
 
     foreach (var cliente in listaDeClientes)
     {
-        Console.WriteLine("Id:" + cliente[0]);
-        Console.WriteLine("Nome:" + cliente[1]);
-        Console.WriteLine("Telefone:" + cliente[2]);
-        Console.WriteLine("Email:" + cliente[3]);
+        Console.WriteLine("Id:" + cliente.Id);
+        Console.WriteLine("Nome:" + cliente.Nome);
+        Console.WriteLine("Telefone:" + cliente.Telefone);
+        Console.WriteLine("Email:" + cliente.Email);
         Console.WriteLine("----------------------------");
 
         if (sleep)
@@ -432,13 +434,13 @@ void fazendoDebitoCliente()
     Console.Clear();
     Console.WriteLine("Digite o valor de retirada:");
     double credito = Convert.ToDouble(Console.ReadLine());
-    string[] creditoConta = new string[3];
-
-    creditoConta[0] = cliente[0];
-    creditoConta[1] = $"-{credito}";
-    creditoConta[2] = DateTime.Now.ToString("dd/MM/yyyy HH:MM");
-
-    contaCorrete.Add(creditoConta);
+    
+    contaCorrete.Add(new
+    {
+        IdCliente = cliente.Id,
+        Valor = credito * -1,
+        Data = DateTime.Now
+    });
 
     var idCliente = cliente[0];
     mensagem($"""
@@ -463,36 +465,35 @@ void adicionarCreditoCliente()
 
     contaCorrete.Add(creditoConta);
 
-    var idCliente = cliente[0];
     mensagem($"""
     Credito adicionado com sucesso ...
-    Saldo do cliente {cliente[1]} é de R$ {saldoCliente(idCliente)}
+    Saldo do cliente {cliente.Nome} é de R$ {saldoCliente(cliente.Id)}
     """);
 }
 
 
-List<string[]> extratoCliente(string idCliente)
+List<dynamic> extratoCliente(string idCliente)
 {
-    var contaCorreteCliente = contaCorrete.FindAll(cc => cc[0] == idCliente);
-    if (contaCorreteCliente.Count == 0) return new List<string[]>();
+    var contaCorreteCliente = contaCorrete.FindAll(cc => cc.IdCliente == idCliente);
+    if (contaCorreteCliente.Count == 0) return new List<dynamic>();
 
     return contaCorreteCliente;
 }
 
-double saldoCliente(string idCliente, List<string[]>? contaCorreteCliente = null)
+double saldoCliente(string idCliente, List<dynamic>? contaCorreteCliente = null)
 {
     if (contaCorreteCliente == null)
         contaCorreteCliente = extratoCliente(idCliente);
 
-    return contaCorreteCliente.Sum(cc => Convert.ToDouble(cc[1]));
+    return contaCorreteCliente.Sum(cc => Convert.ToDouble(cc.Valor));
 }
 
-string[] capturaCliente()
+ dynamic capturaCliente()
 {
     listarClientesCadastrados();
     Console.WriteLine("Digite o ID do cliente");
     var idCliente = Console.ReadLine()?.Trim();
-    string[]? cliente = listaDeClientes.Find(c => c[0] == idCliente);
+    var cliente = listaDeClientes.Find(c => c.Id == idCliente);
 
     if (cliente == null)
     {
