@@ -442,10 +442,9 @@ void fazendoDebitoCliente()
         Data = DateTime.Now
     });
 
-    var idCliente = cliente[0];
     mensagem($"""
     Retirada realizada com sucesso ...
-    Saldo do cliente {cliente[1]} é de R$ {saldoCliente(idCliente)}
+    Saldo do cliente {cliente.Nome} é de R$ {saldoCliente(cliente.Id)}
     """);
 }
 
@@ -457,13 +456,13 @@ void adicionarCreditoCliente()
     Console.Clear();
     Console.WriteLine("Digite o valor do crédito:");
     double credito = Convert.ToDouble(Console.ReadLine());
-    string[] creditoConta = new string[3];
-
-    creditoConta[0] = cliente[0];
-    creditoConta[1] = credito.ToString();
-    creditoConta[2] = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
-
-    contaCorrete.Add(creditoConta);
+    
+    contaCorrete.Add(new
+    {
+        IdCliente = cliente.Id,
+        Valor = credito,
+        Data = DateTime.Now
+    });
 
     mensagem($"""
     Credito adicionado com sucesso ...
@@ -485,7 +484,13 @@ double saldoCliente(string idCliente, List<dynamic>? contaCorreteCliente = null)
     if (contaCorreteCliente == null)
         contaCorreteCliente = extratoCliente(idCliente);
 
-    return contaCorreteCliente.Sum(cc => Convert.ToDouble(cc.Valor));
+    double soma = 0;
+    foreach(var cc in contaCorreteCliente)
+    {
+        soma += cc.Valor;
+    }
+    return soma;
+    //return Convert.ToDouble(contaCorreteCliente.Sum(cc => cc.Valor));
 }
 
  dynamic capturaCliente()
