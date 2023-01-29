@@ -269,9 +269,10 @@
 //}
 
 using System.Runtime.CompilerServices;
+using Logica.Models;
 
-List<dynamic> listaDeClientes = new List<dynamic>();
-List<dynamic> contaCorrete = new List<dynamic>();
+List<Cliente> listaDeClientes = new List<Cliente>();
+List<ContaCorrente> contaCorrete = new List<ContaCorrente>();
 
 while (true)
 {
@@ -401,7 +402,7 @@ void cadastrarCliente()
 
     if (listaDeClientes.Count > 0)
     {
-        var cli = listaDeClientes.Find(c => c.Telefone == telefone);
+        Cliente? cli = listaDeClientes.Find(c => c.Telefone == telefone);
         if (cli != null)
         {
             mensagem($"Cliente já cadastrado com este telefone {telefone}, cadastre novamente");
@@ -409,7 +410,7 @@ void cadastrarCliente()
         }
     }
 
-    listaDeClientes.Add(new
+    listaDeClientes.Add(new Cliente
     {
         Id = id,
         Nome = nomeCliente ?? "[Sem Nome]",
@@ -435,7 +436,7 @@ void fazendoDebitoCliente()
     Console.WriteLine("Digite o valor de retirada:");
     double credito = Convert.ToDouble(Console.ReadLine());
     
-    contaCorrete.Add(new
+    contaCorrete.Add(new ContaCorrente
     {
         IdCliente = cliente.Id,
         Valor = credito * -1,
@@ -457,7 +458,7 @@ void adicionarCreditoCliente()
     Console.WriteLine("Digite o valor do crédito:");
     double credito = Convert.ToDouble(Console.ReadLine());
     
-    contaCorrete.Add(new
+    contaCorrete.Add(new ContaCorrente
     {
         IdCliente = cliente.Id,
         Valor = credito,
@@ -471,26 +472,21 @@ void adicionarCreditoCliente()
 }
 
 
-List<dynamic> extratoCliente(string idCliente)
+List<ContaCorrente> extratoCliente(string idCliente)
 {
     var contaCorreteCliente = contaCorrete.FindAll(cc => cc.IdCliente == idCliente);
-    if (contaCorreteCliente.Count == 0) return new List<dynamic>();
+    if (contaCorreteCliente.Count == 0) return new List<ContaCorrente>();
 
     return contaCorreteCliente;
 }
 
-double saldoCliente(string idCliente, List<dynamic>? contaCorreteCliente = null)
+double saldoCliente(string idCliente, List<ContaCorrente>? contaCorreteCliente = null)
 {
     if (contaCorreteCliente == null)
         contaCorreteCliente = extratoCliente(idCliente);
 
-    double soma = 0;
-    foreach(var cc in contaCorreteCliente)
-    {
-        soma += cc.Valor;
-    }
-    return soma;
-    //return Convert.ToDouble(contaCorreteCliente.Sum(cc => cc.Valor));
+    
+    return Convert.ToDouble(contaCorreteCliente.Sum(cc => cc.Valor));
 }
 
  dynamic capturaCliente()
@@ -498,7 +494,7 @@ double saldoCliente(string idCliente, List<dynamic>? contaCorreteCliente = null)
     listarClientesCadastrados();
     Console.WriteLine("Digite o ID do cliente");
     var idCliente = Console.ReadLine()?.Trim();
-    var cliente = listaDeClientes.Find(c => c.Id == idCliente);
+    Cliente? cliente = listaDeClientes.Find(c => c.Id == idCliente);
 
     if (cliente == null)
     {

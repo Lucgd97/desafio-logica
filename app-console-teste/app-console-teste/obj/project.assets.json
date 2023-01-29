@@ -15,9 +15,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\app-console-teste\\app-console-teste.csproj",
-      "projectName": "app-console-teste",
-      "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\app-console-teste\\app-console-teste.csproj",
+      "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\app-console-teste\\teoria.csproj",
+      "projectName": "teoria",
+      "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\app-console-teste\\teoria.csproj",
       "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\app-console-teste\\obj\\",
       "projectStyle": "PackageReference",

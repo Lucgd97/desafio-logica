@@ -15,9 +15,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\exercicio-log-5\\exercicio-log-6.csproj",
-      "projectName": "exercicio-log-6",
-      "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\exercicio-log-5\\exercicio-log-6.csproj",
+      "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\exercicio-log-5\\Logica.csproj",
+      "projectName": "Logica",
+      "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\exercicio-log-5\\Logica.csproj",
       "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\app-console-teste\\exercicio-log-5\\obj\\",
       "projectStyle": "PackageReference",
