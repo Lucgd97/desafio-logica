@@ -1,7 +1,1 @@
-﻿Console.WriteLine("Veiculo saindo ...");
-Thread.Sleep(2000);
-for (var km = 0; km <= 1000; km++)
-{
-    Console.WriteLine($"Passando pelo km {km} ...");
-    Thread.Sleep(10);
-}
+﻿
