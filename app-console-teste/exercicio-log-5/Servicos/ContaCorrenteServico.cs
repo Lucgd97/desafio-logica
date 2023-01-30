@@ -11,22 +11,28 @@ namespace Logica.Servicos
     {
         private ContaCorrenteServico() { }
 
-        private ContaCorrenteServico instancia;
+        private static ContaCorrenteServico instancia = default!;
 
-        private List<ContaCorrente> contaCorrente = new List<ContaCorrente>();
-
-        public List<ContaCorrente> extratoCliente(string idCliente)
+        public static ContaCorrenteServico Get()
         {
-            var contaCorreteCliente = contaCorrente.FindAll(cc => cc.IdCliente == idCliente);
+            if(instancia == null) instancia = new ContaCorrenteServico();
+            return instancia;
+        }
+
+        public List<ContaCorrente> Lista = new List<ContaCorrente>();
+
+        public List<ContaCorrente> ExtratoCliente(string idCliente)
+        {
+            var contaCorreteCliente = this.Lista.FindAll(cc => cc.IdCliente == idCliente);
             if (contaCorreteCliente.Count == 0) return new List<ContaCorrente>();
 
             return contaCorreteCliente;
         }
 
-        public double saldoCliente(string idCliente, List<ContaCorrente>? contaCorreteCliente = null)
+        public double SaldoCliente(string idCliente, List<ContaCorrente>? contaCorreteCliente = null)
         {
             if (contaCorreteCliente == null)
-                contaCorreteCliente = extratoCliente(idCliente);
+                contaCorreteCliente = ExtratoCliente(idCliente);
 
             if (contaCorreteCliente.Count == 0) return 0;
 

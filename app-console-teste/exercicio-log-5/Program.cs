@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Logica.Models;
+using Logica.Servicos;
 
-List<Cliente> listaDeClientes = new List<Cliente>();
 
 while (true)
 {
@@ -54,7 +54,7 @@ void mostrarContaCorrente()
 {
     Console.Clear();
 
-    if (listaDeClientes.Count == 0 || contaCorrete.Count == 0)
+    if (ClienteServico.Get().Lista.Count == 0 || ContaCorrenteServico.Get().Lista.Count == 0)
     {
         mensagem("Não existe clientes ou não existe movimentações em conta correte, cadastre o cliente e faça crédito em conta");
         return;
@@ -62,7 +62,7 @@ void mostrarContaCorrente()
 
     var cliente = capturaCliente();
 
-    var contaCorrenteCliente = extratoCliente(cliente.Id);
+    var contaCorrenteCliente = ContaCorrenteServico.Get().ExtratoCliente(cliente.Id);
     Console.Clear();
     Console.WriteLine("----------------------");
     foreach (var contaCorrente in contaCorrenteCliente)
@@ -74,7 +74,7 @@ void mostrarContaCorrente()
 
     Console.WriteLine($"""
     O valor total da conta do cliente {cliente.Nome} é de:
-    R$ {saldoCliente(cliente.Id, contaCorrenteCliente)}
+    R$ {ContaCorrenteServico.Get().SaldoCliente(cliente.Id, contaCorrenteCliente)}
     """);
 
 
@@ -84,7 +84,7 @@ void mostrarContaCorrente()
 
 void listarClientesCadastrados()
 {
-    if (listaDeClientes.Count == 0)
+    if (ClienteServico.Get().Lista.Count == 0)
     {
         menuCadastraClienteSeNaoExiste();
     }
@@ -100,7 +100,7 @@ void mostrarClientes(
     Console.Clear();
     Console.WriteLine(header);
 
-    foreach (var cliente in listaDeClientes)
+    foreach (var cliente in ClienteServico.Get().Lista)
     {
         Console.WriteLine("Id:" + cliente.Id);
         Console.WriteLine("Nome:" + cliente.Nome);
@@ -129,9 +129,9 @@ void cadastrarCliente()
     Console.WriteLine($"Informe o email do cliente {nomeCliente}: ");
     var email = Console.ReadLine();
 
-    if (listaDeClientes.Count > 0)
+    if (ClienteServico.Get().Lista.Count > 0)
     {
-        Cliente? cli = listaDeClientes.Find(c => c.Telefone == telefone);
+        Cliente? cli = ClienteServico.Get().Lista.Find(c => c.Telefone == telefone);
         if (cli != null)
         {
             mensagem($"Cliente já cadastrado com este telefone {telefone}, cadastre novamente");
@@ -139,7 +139,7 @@ void cadastrarCliente()
         }
     }
 
-    listaDeClientes.Add(new Cliente
+    ClienteServico.Get().Lista.Add(new Cliente
     {
         Id = id,
         Nome = nomeCliente ?? "[Sem Nome]",
@@ -165,7 +165,7 @@ void fazendoDebitoCliente()
     Console.WriteLine("Digite o valor de retirada:");
     double credito = Convert.ToDouble(Console.ReadLine());
     
-    contaCorrete.Add(new ContaCorrente
+    ContaCorrenteServico.Get().Lista.Add(new ContaCorrente
     {
         IdCliente = cliente.Id,
         Valor = credito * -1,
@@ -174,7 +174,7 @@ void fazendoDebitoCliente()
 
     mensagem($"""
     Retirada realizada com sucesso ...
-    Saldo do cliente {cliente.Nome} é de R$ {saldoCliente(cliente.Id)}
+    Saldo do cliente {cliente.Nome} é de R$ {ContaCorrenteServico.Get().SaldoCliente(cliente.Id)}
     """);
 }
 
@@ -187,7 +187,7 @@ void adicionarCreditoCliente()
     Console.WriteLine("Digite o valor do crédito:");
     double credito = Convert.ToDouble(Console.ReadLine());
     
-    contaCorrete.Add(new ContaCorrente
+    ContaCorrenteServico.Get().Lista.Add(new ContaCorrente
     {
         IdCliente = cliente.Id,
         Valor = credito,
@@ -196,7 +196,7 @@ void adicionarCreditoCliente()
 
     mensagem($"""
     Credito adicionado com sucesso ...
-    Saldo do cliente {cliente.Nome} é de R$ {saldoCliente(cliente.Id)}
+    Saldo do cliente {cliente.Nome} é de R$ {ContaCorrenteServico.Get().SaldoCliente(cliente.Id)}
     """);
 }
 
@@ -206,7 +206,7 @@ void adicionarCreditoCliente()
     listarClientesCadastrados();
     Console.WriteLine("Digite o ID do cliente");
     var idCliente = Console.ReadLine()?.Trim();
-    Cliente? cliente = listaDeClientes.Find(c => c.Id == idCliente);
+    Cliente? cliente = ClienteServico.Get().Lista.Find(c => c.Id == idCliente);
 
     if (cliente == null)
     {
