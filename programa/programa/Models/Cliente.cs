@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programa.Models
 {
-    struct Cliente
+    public struct Cliente
     {
         public string Id { get; set; }
         public string Nome { get; set; }

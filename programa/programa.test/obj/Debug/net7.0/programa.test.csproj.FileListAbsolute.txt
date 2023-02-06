@@ -10,3 +10,9 @@ C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Program
 C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\obj\Debug\net7.0\refint\programa.test.dll
 C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\obj\Debug\net7.0\programa.test.pdb
 C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\obj\Debug\net7.0\ref\programa.test.dll
+C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\bin\Debug\net7.0\Programa.deps.json
+C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\bin\Debug\net7.0\Programa.runtimeconfig.json
+C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\bin\Debug\net7.0\Programa.exe
+C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\bin\Debug\net7.0\Programa.dll
+C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\bin\Debug\net7.0\Programa.pdb
+C:\Users\lucas\OneDrive\Área de Trabalho\Alura\C# Danilo\desafio-logica\Programa-Desafio-Logica\Programa\programa.test\obj\Debug\net7.0\programa.test.csproj.CopyComplete

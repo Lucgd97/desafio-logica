@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "Programa/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Programa.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Programa.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Programa/1.0.0": {
+      "type": "project",
+      "path": "../programa/Programa.csproj",
+      "msbuildProject": "../programa/Programa.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "Programa >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\lucas\\.nuget\\packages\\": {},
@@ -41,7 +60,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj": {
+              "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

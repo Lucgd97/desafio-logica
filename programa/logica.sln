@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa", "Programa-Desafio-Logica\Programa.csproj", "{3394A359-5647-4648-B51A-349D5D1FC98D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa", "programa\Programa.csproj", "{3394A359-5647-4648-B51A-349D5D1FC98D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "programa.test", "programa.test\programa.test.csproj", "{7C522883-AD0A-4BF4-8643-B2A60980AA5E}"
 EndProject
