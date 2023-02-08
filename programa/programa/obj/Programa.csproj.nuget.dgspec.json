@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj": {}
+    "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj": {
+    "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
+        "projectUniqueName": "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
         "projectName": "Programa",
-        "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
+        "projectPath": "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
         "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\obj\\",
+        "outputPath": "c:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

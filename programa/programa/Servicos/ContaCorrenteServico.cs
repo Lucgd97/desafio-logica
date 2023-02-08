@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Programa.Servicos
 {
-    class ContaCorrenteServico
+    public class ContaCorrenteServico
     {
         private ContaCorrenteServico() { }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Programa.Servicos
 {
-    class ClienteServico
+    public class ClienteServico
     {
         private ClienteServico() { }
 
