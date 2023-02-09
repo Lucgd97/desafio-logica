@@ -30,14 +30,17 @@ public class ContaCorrenteServicoTest
     [TestMethod]
     public void TestandoRetornoDoExtrato(){
         
-        // testar get (public or private)
+        // Preparacao (Arrange)
         Assert.IsNotNull(ContaCorrenteServico.Get());
         Assert.IsNotNull(ContaCorrenteServico.Get().Lista);
 
+        // Processamento dados (Act)
         ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
             IdCliente = "2122222"
             });            
         
+
+        //validacao (Assert)
         Assert.AreEqual(1, ContaCorrenteServico.Get().Lista.Count);
         
     }
