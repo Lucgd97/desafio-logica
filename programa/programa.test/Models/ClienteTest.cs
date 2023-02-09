@@ -15,7 +15,7 @@ public class ClienteTest
     public void TestandoPropriedadesDaClasse(){
         
         var cliente = new Cliente();
-        // tstar set (public or private)
+        // testar set (public or private)
         cliente.Id = "23432123";
         cliente.Nome = "Marcela";
         cliente.Email = "ma@teste.com";
