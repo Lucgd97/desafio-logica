@@ -29,7 +29,7 @@ public class ContaCorrenteServicoTest
     [TestMethod]
     public void TestandoUnicaInstanciaDoServico(){
 
-        Console.WriteLine("========== [TestandoUnicaInstanciaDoServico] ==========");        
+       // Console.WriteLine("========== [TestandoUnicaInstanciaDoServico] ==========");        
         // testar get (public or private)
         Assert.IsNotNull(ContaCorrenteServico.Get());
         Assert.IsNotNull(ContaCorrenteServico.Get().Lista);
@@ -46,23 +46,13 @@ public class ContaCorrenteServicoTest
     [TestMethod]
     public void TestandoRetornoDoExtrato(){
         
-        Console.WriteLine("========== [TestandoRetornoDoExtrato] ==========");
+        //Console.WriteLine("========== [TestandoRetornoDoExtrato] ==========");
         // Preparacao (Arrange)
-        var IdCliente = Guid.NewGuid().ToString();
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = IdCliente,
-            Valor = 100.01,
-            Data = DateTime.Now
-        });
-
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = IdCliente,
-            Valor = 50,
-            Data = DateTime.Now
-        });
+        var idCliente = Guid.NewGuid().ToString();
+        criarDadosContaFake(idCliente, new double[] {100.5, 10});
         
         // Processamento dados (Act)
-        var extrato = ContaCorrenteServico.Get().ExtratoCliente(IdCliente);            
+        var extrato = ContaCorrenteServico.Get().ExtratoCliente(idCliente);            
         
 
         //validacao (Assert)
@@ -70,10 +60,57 @@ public class ContaCorrenteServicoTest
         
     }
 
+    private void criarDadosContaFake(string idCliente, double[]valores)
+    {
+        foreach(var valor in valores)
+        {
+            ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
+            IdCliente = idCliente,
+            Valor = valor,
+            Data = DateTime.Now
+        });
+        }       
+    }
+
     [TestMethod]
     public void TestandoRetornoDoExtratoComQuantidadeAMais(){
         
-        Console.WriteLine("========== [TestandoRetornoDoExtratoComQuantidadeAMais] ==========");
+        //Console.WriteLine("========== [TestandoRetornoDoExtratoComQuantidadeAMais] ==========");
+        // Preparacao (Arrange)
+        var idCliente = Guid.NewGuid().ToString();
+        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
+            IdCliente = idCliente,
+            Valor = 100.01,
+            Data = DateTime.Now
+        });
+
+        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
+            IdCliente = idCliente,
+            Valor = 50,
+            Data = DateTime.Now
+        });
+        
+        var idCliente2 = Guid.NewGuid().ToString();
+        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
+            IdCliente = idCliente2,
+            Valor = 40,
+            Data = DateTime.Now
+        });
+
+        // Processamento dados (Act)
+        var extrato = ContaCorrenteServico.Get().ExtratoCliente(idCliente2);            
+        
+
+        //validacao (Assert)
+        Assert.AreEqual(1, extrato.Count);
+        Assert.AreEqual(3, ContaCorrenteServico.Get().Lista.Count);
+        
+    }
+
+    [TestMethod]
+    public void TestandoRetornoDoExtratoComQuantidadeAMais(){
+        
+        //Console.WriteLine("========== [TestandoRetornoDoExtratoComQuantidadeAMais] ==========");
         // Preparacao (Arrange)
         var IdCliente = Guid.NewGuid().ToString();
         ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
