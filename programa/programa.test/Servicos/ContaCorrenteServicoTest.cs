@@ -11,6 +11,7 @@ namespace Programa.Test.Models;
 [TestClass]
 public class ContaCorrenteServicoTest
 {
+    #region Metodos de setup test
     [TestInitialize()]
     public void Startup()
     {
@@ -24,8 +25,22 @@ public class ContaCorrenteServicoTest
         ContaCorrenteServico.Get().Lista = new List<ContaCorrente>();
         //Console.WriteLine("========== [Depois do teste] ==========");
     }
-    
-    
+    #endregion
+
+    #region  Metodos helpers
+    private void criarDadosContaFake(string idCliente, double[]valores)
+    {
+        foreach(var valor in valores)
+        {
+            ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
+            IdCliente = idCliente,
+            Valor = valor,
+            Data = DateTime.Now
+        });
+        }       
+    }
+    #endregion
+        
     [TestMethod]
     public void TestandoUnicaInstanciaDoServico(){
 
@@ -60,47 +75,20 @@ public class ContaCorrenteServicoTest
         
     }
 
-    private void criarDadosContaFake(string idCliente, double[]valores)
-    {
-        foreach(var valor in valores)
-        {
-            ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = idCliente,
-            Valor = valor,
-            Data = DateTime.Now
-        });
-        }       
-    }
-
     [TestMethod]
     public void TestandoRetornoDoExtratoComQuantidadeAMais(){
         
         //Console.WriteLine("========== [TestandoRetornoDoExtratoComQuantidadeAMais] ==========");
         // Preparacao (Arrange)
         var idCliente = Guid.NewGuid().ToString();
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = idCliente,
-            Valor = 100.01,
-            Data = DateTime.Now
-        });
-
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = idCliente,
-            Valor = 50,
-            Data = DateTime.Now
-        });
-        
+        criarDadosContaFake(idCliente, new double[] {100.01, 50});
+       
         var idCliente2 = Guid.NewGuid().ToString();
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = idCliente2,
-            Valor = 40,
-            Data = DateTime.Now
-        });
-
+         criarDadosContaFake(idCliente2, new double[] {40});   
+         
         // Processamento dados (Act)
         var extrato = ContaCorrenteServico.Get().ExtratoCliente(idCliente2);            
         
-
         //validacao (Assert)
         Assert.AreEqual(1, extrato.Count);
         Assert.AreEqual(3, ContaCorrenteServico.Get().Lista.Count);
@@ -108,38 +96,22 @@ public class ContaCorrenteServicoTest
     }
 
     [TestMethod]
-    public void TestandoRetornoDoExtratoComQuantidadeAMais(){
+    public void TestandoSaldoDeUmCliente(){
         
         //Console.WriteLine("========== [TestandoRetornoDoExtratoComQuantidadeAMais] ==========");
         // Preparacao (Arrange)
         var IdCliente = Guid.NewGuid().ToString();
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = IdCliente,
-            Valor = 100.01,
-            Data = DateTime.Now
-        });
-
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = IdCliente,
-            Valor = 50,
-            Data = DateTime.Now
-        });
-        
-        var idCliente2 = Guid.NewGuid().ToString();
-        ContaCorrenteServico.Get().Lista.Add(new ContaCorrente(){
-            IdCliente = idCliente2,
-            Valor = 40,
-            Data = DateTime.Now
-        });
-
+        criarDadosContaFake(IdCliente, new double[] {5, 5, 5, -10});
+        criarDadosContaFake(Guid.NewGuid().ToString(), new double[] {300, 45});
+              
         // Processamento dados (Act)
-        var extrato = ContaCorrenteServico.Get().ExtratoCliente(idCliente2);            
+        var saldo = ContaCorrenteServico.Get().SaldoCliente(IdCliente);            
         
-
         //validacao (Assert)
-        Assert.AreEqual(1, extrato.Count);
-        Assert.AreEqual(3, ContaCorrenteServico.Get().Lista.Count);
+        Assert.AreEqual(5, saldo);
+        Assert.AreEqual(6, ContaCorrenteServico.Get().Lista.Count);
         
     }
+    
 }
 
