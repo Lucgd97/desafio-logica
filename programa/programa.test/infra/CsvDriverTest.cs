@@ -5,18 +5,18 @@ using Programa.Models;
 namespace Programa.Infra;
 
 [TestClass]
-public class JsonDriverTest
+public class CsvDriverTest
 {
 
-    public JsonDriverTest()
+    public CsvDriverTest()
     {
         var caminho = Environment.GetEnvironmentVariable("LOCAL_GRAVACAO_TEST_DESAFIO_DOTNET7") ?? "/tmp";
         this.caminhoArquivoTest = caminho;        
-        this.jsonDriver = new JsonDriver(this.caminhoArquivoTest);
+        this.csvDriver = new CsvDriver(this.caminhoArquivoTest);
     }
 
     private string caminhoArquivoTest;
-    private JsonDriver jsonDriver;
+    private CsvDriver csvDriver;
 
     [TestMethod]
     public async Task TestandoDriverJsonParaClientes()
@@ -31,9 +31,9 @@ public class JsonDriverTest
             Telefone = "(11)12345-1234"
         };
 
-        await this.jsonDriver.Salvar(cliente);
+        await this.csvDriver.Salvar(cliente);
 
-        var existe = File.Exists(this.caminhoArquivoTest + "/clientes.json");
+        var existe = File.Exists(this.caminhoArquivoTest + "/clientes.csv");
     }
 
     [TestMethod]
@@ -46,8 +46,8 @@ public class JsonDriverTest
             Data = DateTime.Now
         };
 
-        await jsonDriver.Salvar(contaCorrente);
+        await csvDriver.Salvar(contaCorrente);
 
-        var existe = File.Exists(this.caminhoArquivoTest + "/clientes.json");
+        var existe = File.Exists(this.caminhoArquivoTest + "/clientes.csv");
     }
 }
