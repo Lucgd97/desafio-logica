@@ -48,6 +48,6 @@ public class CsvDriverTest
 
         await csvDriver.Salvar(contaCorrente);
 
-        var existe = File.Exists(this.caminhoArquivoTest + "/clientes.csv");
+        var existe = File.Exists(this.caminhoArquivoTest + "/contascorrentes.csv");
     }
 }

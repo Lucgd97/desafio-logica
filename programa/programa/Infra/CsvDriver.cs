@@ -16,17 +16,17 @@ public class CsvDriver : IPersistencia
     {
         return this.localGravacao;
     }
-    public void Alterar(string Id, object objeto)
+    public async Task Alterar(string Id, object objeto)
     {
         throw new NotImplementedException();
     }
 
-    public List<object> BuscarPorId(string Id)
+    public async Task<List<object>> BuscarPorId(string Id)
     {
         throw new NotImplementedException();
     }
 
-    public void Excluir(object objeto)
+    public async Task Excluir(object objeto)
     {
         throw new NotImplementedException();
     }
@@ -54,7 +54,7 @@ public class CsvDriver : IPersistencia
         await File.WriteAllTextAsync($"{this.GetLocalGravacao()}/{nome}s.csv", csvString);
     }
 
-    public List<object> Todos()
+    public async Task<List<object>> Todos()
     {
         throw new NotImplementedException();
     }

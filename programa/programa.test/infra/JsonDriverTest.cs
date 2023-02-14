@@ -48,6 +48,23 @@ public class JsonDriverTest
 
         await jsonDriver.Salvar(contaCorrente);
 
-        var existe = File.Exists(this.caminhoArquivoTest + "/clientes.json");
+        var existe = File.Exists(this.caminhoArquivoTest + "/contascorrentes.json");
+    }
+
+    [TestMethod]
+    public async Task TestandoBuscaDeTodasAsEntidades()
+    {           
+        var contaCorrente = new ContaCorrente()
+        {
+            IdCliente = Guid.NewGuid().ToString(),
+            Valor = 200,
+            Data = DateTime.Now
+        };
+
+        await jsonDriver.Salvar(contaCorrente);
+
+        var todos = await jsonDriver.Todos();
+
+        Assert.IsTrue(todos.Count > 0);
     }
 }
