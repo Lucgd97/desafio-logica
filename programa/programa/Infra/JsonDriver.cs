@@ -32,7 +32,10 @@ public class JsonDriver<T> : IPersistencia<T>
 
     public async Task Salvar(T objeto)
     {
-        string jsonString = JsonSerializer.Serialize(objeto);
+        var lista = await Todos();
+        lista.Add(objeto);
+
+        string jsonString = JsonSerializer.Serialize(lista);
         
         var nome = typeof(T).Name.ToLower();
         await File.WriteAllTextAsync($"{this.GetLocalGravacao()}/{nome}s.json", jsonString);

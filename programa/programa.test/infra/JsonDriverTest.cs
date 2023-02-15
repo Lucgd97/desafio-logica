@@ -20,7 +20,8 @@ public class JsonDriverTest
     public async Task TestandoDriverJsonParaClientes()
     {   
         
-        
+        var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
+
         var cliente = new Cliente()
         {
             Id = Guid.NewGuid().ToString(),
@@ -29,14 +30,16 @@ public class JsonDriverTest
             Telefone = "(11)12345-1234"
         };
 
-        await this.jsonDriver.Salvar(cliente);
+        await jsonDriver.Salvar(cliente);
 
         var existe = File.Exists(this.caminhoArquivoTest + "/clientes.json");
     }
 
     [TestMethod]
     public async Task TestandoDriverJsonParaContaCorrente()
-    {           
+    {  
+        var jsonDriver = new JsonDriver<ContaCorrente>(this.caminhoArquivoTest);
+
         var contaCorrente = new ContaCorrente()
         {
             IdCliente = Guid.NewGuid().ToString(),
@@ -51,7 +54,9 @@ public class JsonDriverTest
 
     [TestMethod]
     public async Task TestandoBuscaDeTodasAsEntidades()
-    {           
+    {      
+        var jsonDriver = new JsonDriver<ContaCorrente>(this.caminhoArquivoTest);
+             
         var contaCorrente = new ContaCorrente()
         {
             IdCliente = Guid.NewGuid().ToString(),

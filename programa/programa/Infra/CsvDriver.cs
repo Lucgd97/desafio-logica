@@ -38,6 +38,7 @@ public class CsvDriver<T> : IPersistencia<T>
         var header = string.Join(";", props.ToList().Select(x => x.Name));
         linhasDoCsv.Add(header);
 
+        
         var lista = new List<T>();
         lista.Add(objeto);
 
