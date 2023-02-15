@@ -11,13 +11,11 @@ public class JsonDriverTest
     public JsonDriverTest()
     {
         var caminho = Environment.GetEnvironmentVariable("LOCAL_GRAVACAO_TEST_DESAFIO_DOTNET7") ?? "/tmp";
-        this.caminhoArquivoTest = caminho;        
-        this.jsonDriver = new JsonDriver(this.caminhoArquivoTest);
+        this.caminhoArquivoTest = caminho;
     }
 
     private string caminhoArquivoTest;
-    private JsonDriver jsonDriver;
-
+    
     [TestMethod]
     public async Task TestandoDriverJsonParaClientes()
     {   
