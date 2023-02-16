@@ -70,4 +70,25 @@ public class JsonDriverTest
 
         Assert.IsTrue(todos.Count > 0);
     }
+
+    [TestMethod]
+    public async Task TestandoAlterecaoDeEntidade()
+    {      
+        var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
+             
+        var cliente = new Cliente(){
+            Id =Guid.NewGuid().ToString(),
+            Nome = "Danilo",
+            Email = "danilo@teste.com",
+            Telefone = "(16)12345-1234"
+        };
+
+        await jsonDriver.Salvar(cliente);
+
+        cliente.Nome = "Danilo Santos";
+
+        var clienteDb = await jsonDriver.BuscarPorId(cliente.Id);
+
+        Assert.AreEqual("Danilo Santos", clienteDb.Nome);
+    }
 }

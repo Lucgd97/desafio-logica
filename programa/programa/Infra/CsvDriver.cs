@@ -16,12 +16,12 @@ public class CsvDriver<T> : IPersistencia<T>
     {
         return this.localGravacao;
     }
-    public async Task Alterar(string Id, T objeto)
+    public async Task Alterar(string id, T objeto)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<T>> BuscarPorId(string Id)
+    public async Task<T> BuscarPorId(string id)
     {
         throw new NotImplementedException();
     }

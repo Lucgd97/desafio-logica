@@ -15,14 +15,15 @@ public class JsonDriver<T> : IPersistencia<T>
     {
         return this.localGravacao;
     }
-    public async Task Alterar(string Id, T objeto)
+    public async Task Alterar(string id, T objeto)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<T>> BuscarPorId(string Id)
+    public async Task<T> BuscarPorId(string id)
     {
-        throw new NotImplementedException();
+        var lista = await Todos();
+        return lista.Find(o => o.GetType().GetProperty("Id").GetValue(o).ToString() == id);
     }
 
     public async Task Excluir(T objeto)
