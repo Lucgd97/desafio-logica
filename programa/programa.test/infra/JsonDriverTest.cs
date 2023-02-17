@@ -83,9 +83,11 @@ public class JsonDriverTest
             Telefone = "(16)12345-1234"
         };
 
-        await jsonDriver.Salvar(cliente);
+        
 
         cliente.Nome = "Danilo Santos";
+
+        await jsonDriver.Salvar(cliente);
 
         var clienteDb = await jsonDriver.BuscarPorId(cliente.Id);
 
