@@ -72,6 +72,25 @@ public class JsonDriverTest
     }
 
     [TestMethod]
+    public async Task TestandoBsucaPorId()
+    {      
+        var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
+             
+        var cliente = new Cliente(){
+            Id =Guid.NewGuid().ToString(),
+            Nome = "Danilo " + DateTime.Now,
+            Email = "danilo@teste.com",
+            Telefone = "(16)12345-1234"
+        };
+
+        await jsonDriver.Salvar(cliente);
+
+        var clienteDb = await jsonDriver.BuscarPorId(cliente.Id);
+        
+        Assert.AreEqual(cliente.Nome, clienteDb.Nome);
+    }
+
+    [TestMethod]
     public async Task TestandoAlterecaoDeEntidade()
     {      
         var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
@@ -83,14 +102,14 @@ public class JsonDriverTest
             Telefone = "(16)12345-1234"
         };
 
-        
+        await jsonDriver.Salvar(cliente);
 
         cliente.Nome = "Danilo Santos";
 
         await jsonDriver.Salvar(cliente);
 
         var clienteDb = await jsonDriver.BuscarPorId(cliente.Id);
-
+        
         Assert.AreEqual("Danilo Santos", clienteDb.Nome);
     }
 }
