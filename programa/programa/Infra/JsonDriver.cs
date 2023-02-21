@@ -47,10 +47,7 @@ public class JsonDriver<T> : IPersistencia<T>
 
         var objLista = buscaListaId(lista, id);
         if(objLista == null) lista.Add(objeto);
-        else
-        {
-            atualizaPropriedades(ref objeto, ref objLista);
-        }
+        else atualizaPropriedades(ref objeto, ref objLista);
 
         lista.Add(objeto);
 
