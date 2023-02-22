@@ -15,10 +15,6 @@ public class JsonDriver<T> : IPersistencia<T>
     {
         return this.localGravacao;
     }
-    public async Task Alterar(string id, T objeto)
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task<T> BuscarPorId(string id)
     {
@@ -46,7 +42,7 @@ public class JsonDriver<T> : IPersistencia<T>
         if(string.IsNullOrEmpty(id)) return;
 
         var objLista = buscaListaId(lista, id);
-        if(objLista == null) lista.Add(objeto);
+        if(objLista == null || objLista.GetType().GetProperty("Id")?.GetValue(objeto)?.ToString() == null) lista.Add(objeto);
         else atualizaPropriedades(ref objeto, ref objLista);
 
         lista.Add(objeto);
@@ -66,7 +62,8 @@ public class JsonDriver<T> : IPersistencia<T>
             var propPara = objListaPara.GetType().GetProperty(propDe.Name);
             if(propPara != null)
             {
-                propPara.SetValue(objListaPara, propDe.GetValue(objetoDe));
+                var valorDe = propDe.GetValue(objetoDe);
+                propPara.SetValue(objListaPara, valorDe);
             }
         }
     }
