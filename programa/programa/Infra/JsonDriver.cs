@@ -79,4 +79,10 @@ public class JsonDriver<T> : IPersistencia<T>
         var lista = JsonSerializer.Deserialize<List<T>>(jsonString);
         return lista ?? new List<T>();       
     }
+
+    public async Task ExcluirTudo()
+    {
+        var nome = typeof(T).Name;
+        await File.WriteAllTextAsync($"{this.GetLocalGravacao()}/{nome}s.json", "[]");
+    }
 }

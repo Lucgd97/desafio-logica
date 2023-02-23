@@ -42,6 +42,7 @@ public class CsvDriverTest
 
         var contaCorrente = new ContaCorrente()
         {
+            Id = Guid.NewGuid().ToString(),
             IdCliente = Guid.NewGuid().ToString(),
             Valor = 200,
             Data = DateTime.Now
@@ -51,4 +52,5 @@ public class CsvDriverTest
 
         var existe = File.Exists(this.caminhoArquivoTest + "/contascorrentes.csv");
     }
+    
 }

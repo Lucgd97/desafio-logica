@@ -15,6 +15,13 @@ public class JsonDriverTest
     }
 
     private string caminhoArquivoTest;
+
+    [TestInitialize()]
+    public async Task Startup()
+    {
+       await new JsonDriver<Cliente>(this.caminhoArquivoTest).ExcluirTudo();
+       await new JsonDriver<ContaCorrente>(this.caminhoArquivoTest).ExcluirTudo();
+    }
     
     [TestMethod]
     public async Task TestandoDriverJsonParaClientes()
@@ -42,6 +49,7 @@ public class JsonDriverTest
 
         var contaCorrente = new ContaCorrente()
         {
+            Id = Guid.NewGuid().ToString(),
             IdCliente = Guid.NewGuid().ToString(),
             Valor = 200,
             Data = DateTime.Now
@@ -59,6 +67,7 @@ public class JsonDriverTest
              
         var contaCorrente = new ContaCorrente()
         {
+            Id = Guid.NewGuid().ToString(),
             IdCliente = Guid.NewGuid().ToString(),
             Valor = 200,
             Data = DateTime.Now
@@ -111,5 +120,30 @@ public class JsonDriverTest
         var clienteDb = await jsonDriver.BuscarPorId(cliente.Id);
         
         Assert.AreEqual("Danilo Santos", clienteDb.Nome);
+    }
+
+    [TestMethod]
+    public async Task TestandoExcluirEntidades()
+    {      
+        var jsonDriver = new JsonDriver<ContaCorrente>(this.caminhoArquivoTest);
+             
+        var contaCorrente = new ContaCorrente()
+        {
+            Id = Guid.NewGuid().ToString(),
+            IdCliente = Guid.NewGuid().ToString(),
+            Valor = 200,
+            Data = DateTime.Now
+        };
+
+        await jsonDriver.Salvar(contaCorrente);
+
+        var todos = await jsonDriver.Todos();
+        Assert.IsTrue(todos.Count > 0);
+
+        await jsonDriver.Excluir(contaCorrente);
+        
+        todos = await jsonDriver.Todos();
+        Assert.IsTrue(todos.Count > 0);
+        
     }
 }

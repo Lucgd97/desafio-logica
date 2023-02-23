@@ -55,4 +55,9 @@ public class CsvDriver<T> : IPersistencia<T>
     {
         throw new NotImplementedException();
     }
+
+    Task IPersistencia<T>.ExcluirTudo()
+    {
+        throw new NotImplementedException();
+    }
 }

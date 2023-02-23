@@ -167,6 +167,7 @@ void fazendoDebitoCliente()
 
     ContaCorrenteServico.Get().Lista.Add(new ContaCorrente
     {
+        Id = Guid.NewGuid().ToString(),
         IdCliente = cliente.Id,
         Valor = credito * -1,
         Data = DateTime.Now
@@ -189,6 +190,7 @@ void adicionarCreditoCliente()
 
     ContaCorrenteServico.Get().Lista.Add(new ContaCorrente
     {
+        Id = Guid.NewGuid().ToString(),
         IdCliente = cliente.Id,
         Valor = credito,
         Data = DateTime.Now
