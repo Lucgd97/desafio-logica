@@ -19,7 +19,10 @@ public class ClienteServicoTest
         Assert.IsNotNull(ClienteServico.Get().Lista);
 
         // test de lista
-        ClienteServico.Get().Lista.Add(new Cliente(){Nome = "teste"});            
+        ClienteServico.Get().Lista.Add(new Cliente(){
+            Id = "23421",
+            Nome = "teste"
+        });            
         
         Assert.AreEqual(1, ClienteServico.Get().Lista.Count);
         

@@ -14,9 +14,8 @@ public class ContaCorrenteTest
     [TestMethod]
     public void TestandoPropriedadesDaClasse(){
         
-        var contaCorrenteTest = new ContaCorrente();
-        // testar set (public or private)
-        contaCorrenteTest.IdCliente = "23432123";
+        var contaCorrenteTest = new ContaCorrente() {IdCliente = "23432123"};
+        // testar set (public or private)        
         contaCorrenteTest.Valor = 1;
         contaCorrenteTest.Data = DateTime.Now;
         

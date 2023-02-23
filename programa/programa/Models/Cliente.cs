@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Programa.Models
 {
-    public struct Cliente
+    public record Cliente
     {
-        public string Id { get; set; }
-        public string Nome { get; set; }
-        public string Telefone { get; set; }
-        public string Email { get; set; }
+        public required string Id { get; set; } = default!;
+        public string Nome { get; set; } = default!;
+        public string Telefone { get; set; } = default!;
+        public string Email { get; set; } = default!;
     }
 }
