@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using Programa.Infra.Interfaces;
 
@@ -22,15 +23,10 @@ public class JsonDriver<T> : IPersistencia<T>
         return buscaListaId(lista, id);
     }
 
-    private T buscaListaId(List<T> lista, string id)
+    private T buscaListaId([NotNull] List<T> lista, string id)
     {
         return lista.Find(o => o.GetType().GetProperty("Id").GetValue(o).ToString() == id);
-    }
-
-    public async Task Excluir(T objeto)
-    {
-        throw new NotImplementedException();
-    }
+    } 
 
     public async Task Salvar(T objeto)
     {
@@ -42,13 +38,16 @@ public class JsonDriver<T> : IPersistencia<T>
         if(string.IsNullOrEmpty(id)) return;
 
         var objLista = buscaListaId(lista, id);
-        if(objLista == null || objLista.GetType().GetProperty("Id")?.GetValue(objeto)?.ToString() == null) lista.Add(objeto);
-        else atualizaPropriedades(ref objeto, ref objLista);
+        if(objLista == null || objLista.GetType().GetProperty("Id")?.GetValue(objeto)?.ToString() == null) 
+            lista.Add(objeto);
+        else atualizaPropriedades(ref objeto, ref objLista);  
 
-        lista.Add(objeto);
+        await salvarLista(lista);      
+    }
 
-        string jsonString = JsonSerializer.Serialize(lista);
-        
+    private async Task salvarLista(List<T> lista)
+    {
+        string jsonString = JsonSerializer.Serialize(lista);        
         var nome = typeof(T).Name.ToLower();
         await File.WriteAllTextAsync($"{this.GetLocalGravacao()}/{nome}s.json", jsonString);
     }
@@ -78,6 +77,13 @@ public class JsonDriver<T> : IPersistencia<T>
         string jsonString = await File.ReadAllTextAsync(arquivo);       
         var lista = JsonSerializer.Deserialize<List<T>>(jsonString);
         return lista ?? new List<T>();       
+    }
+
+     public async Task Excluir(T objeto)
+    {
+        var lista = await Todos();
+        lista.Remove(objeto);
+        await salvarLista(lista);
     }
 
     public async Task ExcluirTudo()

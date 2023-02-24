@@ -137,13 +137,14 @@ public class JsonDriverTest
 
         await jsonDriver.Salvar(contaCorrente);
 
-        var todos = await jsonDriver.Todos();
-        Assert.IsTrue(todos.Count > 0);
+        var objDb = await jsonDriver.BuscarPorId(contaCorrente.Id);
+        Assert.IsNotNull(objDb);
+        Assert.IsNotNull(objDb.Id);
 
         await jsonDriver.Excluir(contaCorrente);
         
-        todos = await jsonDriver.Todos();
-        Assert.IsTrue(todos.Count > 0);
+        var objDb2 = await jsonDriver.BuscarPorId(contaCorrente.Id);        
+        Assert.IsNull(objDb2);
         
     }
 }

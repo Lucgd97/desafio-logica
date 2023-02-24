@@ -1,3 +1,4 @@
+
 namespace Programa.Infra.Interfaces;
 
 public interface IPersistencia<T>
