@@ -47,11 +47,11 @@ while (true)
             break;
         case "3":
             Console.Clear();
-            adicionarCreditoCliente();
+            await adicionarCreditoCliente();
             break;
         case "4":
             Console.Clear();
-            fazendoDebitoCliente();
+            await fazendoDebitoCliente();
             break;
         case "5":
             sair = true;
@@ -76,7 +76,7 @@ async Task mostrarContaCorrente()
         return;
     }
 
-    var cliente = capturaCliente();
+    var cliente = await capturaCliente();
 
     var contaCorrenteCliente = await contaCorrenteServico.ExtratoCliente(cliente.Id);
     Console.Clear();
@@ -102,7 +102,7 @@ async Task listarClientesCadastrados()
 {
     if ((await TodosClientes()).Count == 0)
     {
-        menuCadastraClienteSeNaoExiste();
+        await menuCadastraClienteSeNaoExiste();
     }
 
     await mostrarClientes(false, 0, "===============[ Selecione um cliente da lista ]===================");
@@ -177,7 +177,7 @@ void mensagem(string msg)
 async Task fazendoDebitoCliente()
 {
     Console.Clear();
-    var cliente = capturaCliente();
+    var cliente = await capturaCliente();
     Console.Clear();
     Console.WriteLine("Digite o valor de retirada:");
     double credito = Convert.ToDouble(Console.ReadLine());
@@ -200,7 +200,7 @@ async Task fazendoDebitoCliente()
 async Task adicionarCreditoCliente()
 {
     Console.Clear();
-    var cliente = capturaCliente();
+    var cliente = await capturaCliente();
     Console.Clear();
     Console.WriteLine("Digite o valor do crédito:");
     double credito = Convert.ToDouble(Console.ReadLine());
@@ -225,6 +225,15 @@ async Task<Cliente> capturaCliente()
     await listarClientesCadastrados();
     Console.WriteLine("Digite o ID do cliente");
     var idCliente = Console.ReadLine()?.Trim();
+    if(string.IsNullOrEmpty(idCliente))
+    {
+        mensagem("Id do cliente inválido!");
+        Console.Clear();
+
+        await menuCadastraClienteSeNaoExiste();
+
+        return await capturaCliente();
+    }
     Cliente? cliente = await clienteServico.Persistencia.BuscarPorId(idCliente);
 
     if (cliente == null)
@@ -232,15 +241,15 @@ async Task<Cliente> capturaCliente()
         mensagem("Cliente não encontrado na lista, digite o ID corretamente da lista de clientes");
         Console.Clear();
 
-        menuCadastraClienteSeNaoExiste();
+        await menuCadastraClienteSeNaoExiste();
 
-        return capturaCliente();
+        return await capturaCliente();
     }
 
     return cliente;
 }
 
-void menuCadastraClienteSeNaoExiste()
+async Task menuCadastraClienteSeNaoExiste()
 {
     Console.WriteLine("""
         O que você deseja fazer ?
@@ -254,7 +263,7 @@ void menuCadastraClienteSeNaoExiste()
     switch (opcao)
     {
         case "1":
-            cadastrarCliente();
+            await cadastrarCliente();
             break;
         case "3":
             break;
