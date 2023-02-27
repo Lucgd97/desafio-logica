@@ -44,8 +44,8 @@ public class ContaCorrenteServicoTest
         
     [TestMethod]
     public void TestandoUnicaInstanciaDoServico(){
-
-       // Console.WriteLine("========== [TestandoUnicaInstanciaDoServico] ==========");        
+        
+        // Console.WriteLine("========== [TestandoUnicaInstanciaDoServico] ==========");        
         // testar get (public or private)
         Assert.IsNotNull(ContaCorrenteServico.Get());
         Assert.IsNotNull(ContaCorrenteServico.Get().Lista);
