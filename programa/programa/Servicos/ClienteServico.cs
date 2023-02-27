@@ -1,4 +1,5 @@
-﻿using Programa.Models;
+﻿using Programa.Infra.Interfaces;
+using Programa.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,13 @@ namespace Programa.Servicos
 {
     public class ClienteServico
     {
-        private ClienteServico() { }
+        public IPersistencia<Cliente> Persistencia;
 
-        private static ClienteServico instnacia = default!;
-
-        public static ClienteServico Get()
+        public ClienteServico(IPersistencia<Cliente> persistencia) 
         {
-            if (instnacia == null) instnacia = new ClienteServico();
-            return instnacia;
+            this.Persistencia = persistencia;            
         }
 
-        public List<Cliente> Lista = new List<Cliente>();
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Programa.Models;
+﻿using Programa.Infra.Interfaces;
+using Programa.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,30 +10,25 @@ namespace Programa.Servicos
 {
     public class ContaCorrenteServico
     {
-        private ContaCorrenteServico() { }
+        public IPersistencia<ContaCorrente> Persistencia;
 
-        private static ContaCorrenteServico instancia = default!;
-
-        public static ContaCorrenteServico Get()
+        public ContaCorrenteServico(IPersistencia<ContaCorrente> persistencia) 
         {
-            if (instancia == null) instancia = new ContaCorrenteServico();
-            return instancia;
+            this.Persistencia = persistencia;            
         }
 
-        public List<ContaCorrente> Lista = new List<ContaCorrente>();
-
-        public List<ContaCorrente> ExtratoCliente(string idCliente)
+        public async Task<List<ContaCorrente>> ExtratoCliente(string idCliente)
         {
-            var contaCorreteCliente = this.Lista.FindAll(cc => cc.IdCliente == idCliente);
+            var contaCorreteCliente = (await this.Persistencia.Todos()).FindAll(cc => cc.IdCliente == idCliente);
             if (contaCorreteCliente.Count == 0) return new List<ContaCorrente>();
 
             return contaCorreteCliente;
         }
 
-        public double SaldoCliente(string idCliente, List<ContaCorrente>? contaCorreteCliente = null)
+        public async Task<double> SaldoCliente(string idCliente, List<ContaCorrente>? contaCorreteCliente = null)
         {
             if (contaCorreteCliente == null)
-                contaCorreteCliente = ExtratoCliente(idCliente);
+                contaCorreteCliente = await ExtratoCliente(idCliente);
 
             if (contaCorreteCliente.Count == 0) return 0;
 

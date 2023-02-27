@@ -17,15 +17,15 @@ public class JsonDriver<T> : IPersistencia<T>
         return this.localGravacao;
     }
 
-    public async Task<T> BuscarPorId(string id)
+    public async Task<T?> BuscarPorId(string id)
     {
         var lista = await Todos();
         return buscaListaId(lista, id);
     }
 
-    private T buscaListaId([NotNull] List<T> lista, string id)
+    private T? buscaListaId([NotNull] List<T> lista, string id)
     {
-        return lista.Find(o => o.GetType().GetProperty("Id").GetValue(o).ToString() == id);
+        return lista.Find(o => o?.GetType().GetProperty("Id")?.GetValue(o)?.ToString() == id);
     } 
 
     public async Task Salvar(T objeto)
