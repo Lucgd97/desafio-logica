@@ -1,16 +1,15 @@
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Programa.Models;
 
 namespace Programa.Infra;
 
 [TestClass]
-public class JsonDriverTest
+public class AdoMySqlDriverTest
 {
 
-    public JsonDriverTest()
+    public AdoMySqlDriverTest()
     {
-        var caminho = Environment.GetEnvironmentVariable("LOCAL_GRAVACAO_TEST_DESAFIO_DOTNET7") ?? "/tmp";
+        var caminho = Environment.GetEnvironmentVariable("LOCAL_GRAVACAO_TEST_DESAFIO_DOTNET7_MYSQL") ?? "Server=localhost;Database=dotnet7_driver;Uid=root;Pwd=Budboa@123;";
         this.caminhoArquivoTest = caminho;
     }
 
@@ -19,15 +18,15 @@ public class JsonDriverTest
     [TestInitialize()]
     public async Task Startup()
     {
-       await new JsonDriver<Cliente>(this.caminhoArquivoTest).ExcluirTudo();
-       await new JsonDriver<ContaCorrente>(this.caminhoArquivoTest).ExcluirTudo();
+       await new AdoMySqlDriver<Cliente>(this.caminhoArquivoTest).ExcluirTudo();
+       await new AdoMySqlDriver<ContaCorrente>(this.caminhoArquivoTest).ExcluirTudo();
     }
     
     [TestMethod]
     public async Task TestandoDriverJsonParaClientes()
     {   
         
-        var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
+        var jsonDriver = new AdoMySqlDriver<Cliente>(this.caminhoArquivoTest);
 
         var cliente = new Cliente()
         {
@@ -45,7 +44,7 @@ public class JsonDriverTest
     [TestMethod]
     public async Task TestandoDriverJsonParaContaCorrente()
     {  
-        var jsonDriver = new JsonDriver<ContaCorrente>(this.caminhoArquivoTest);
+        var jsonDriver = new AdoMySqlDriver<ContaCorrente>(this.caminhoArquivoTest);
 
         var contaCorrente = new ContaCorrente()
         {
@@ -63,7 +62,7 @@ public class JsonDriverTest
     [TestMethod]
     public async Task TestandoBuscaDeTodasAsEntidades()
     {      
-        var jsonDriver = new JsonDriver<ContaCorrente>(this.caminhoArquivoTest);
+        var jsonDriver = new AdoMySqlDriver<ContaCorrente>(this.caminhoArquivoTest);
              
         var contaCorrente = new ContaCorrente()
         {
@@ -83,7 +82,7 @@ public class JsonDriverTest
     [TestMethod]
     public async Task TestandoBsucaPorId()
     {      
-        var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
+        var jsonDriver = new AdoMySqlDriver<Cliente>(this.caminhoArquivoTest);
              
         var cliente = new Cliente(){
             Id =Guid.NewGuid().ToString(),
@@ -102,7 +101,7 @@ public class JsonDriverTest
     [TestMethod]
     public async Task TestandoAlterecaoDeEntidade()
     {      
-        var jsonDriver = new JsonDriver<Cliente>(this.caminhoArquivoTest);
+        var jsonDriver = new AdoMySqlDriver<Cliente>(this.caminhoArquivoTest);
              
         var cliente = new Cliente(){
             Id =Guid.NewGuid().ToString(),
@@ -125,7 +124,7 @@ public class JsonDriverTest
     [TestMethod]
     public async Task TestandoExcluirEntidades()
     {      
-        var jsonDriver = new JsonDriver<ContaCorrente>(this.caminhoArquivoTest);
+        var jsonDriver = new AdoMySqlDriver<ContaCorrente>(this.caminhoArquivoTest);
              
         var contaCorrente = new ContaCorrente()
         {
