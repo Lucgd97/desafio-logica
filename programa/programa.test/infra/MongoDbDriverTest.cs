@@ -9,7 +9,7 @@ public class MongoDbDriverTest
 
     public MongoDbDriverTest()
     {
-        var caminho = Environment.GetEnvironmentVariable("LOCAL_GRAVACAO_TEST_DESAFIO_DOTNET7_MYSQL") ?? "Server=localhost;Database=dotnet7_driver;Uid=root;Pwd=Budboa@123;";
+        var caminho = Environment.GetEnvironmentVariable("LOCAL_GRAVACAO_TEST_DESAFIO_DOTNET7_MONGODB") ?? "mongodb://localhost#desafio21dias_dotnet7/";
         this.caminhoArquivoTest = caminho;
     }
 

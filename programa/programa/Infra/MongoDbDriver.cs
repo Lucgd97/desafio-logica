@@ -1,12 +1,21 @@
 using System.ComponentModel;
 using System.Text.Json;
+using MongoDB.Driver;
 using Programa.Infra.Interfaces;
 
 public class MongoDbDriver<T> : IPersistencia<T>
 {
+    private IMongoDatabase mongoDatabase;
     public MongoDbDriver(string localGravacao)
     {
         this.localGravacao = localGravacao;
+        var cnn = this.localGravacao.Split('#');
+        this.mongoDatabase = new MongoClient(cnn[0]).GetDatabase(cnn[1]);
+    }
+
+    private IMongoCollection<T> mongoCollection()
+    {
+        return this.mongoDatabase.GetCollection<T>($"{typeof(T).Name.ToLower()}s");
     }
 
     private string localGravacao = "";
@@ -34,7 +43,7 @@ public class MongoDbDriver<T> : IPersistencia<T>
 
     public async Task<List<T>> Todos()
     {
-        throw new NotImplementedException();
+        return await this.mongoCollection().AsQueryable().ToListAsync();
     }
 
     public async Task ExcluirTudo()

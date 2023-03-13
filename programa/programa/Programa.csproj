@@ -8,4 +8,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="mongocsharpdriver" Version="2.19.0" />
+  </ItemGroup>
+
 </Project>
