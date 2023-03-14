@@ -2,6 +2,9 @@ using System.ComponentModel;
 using System.Text.Json;
 using MongoDB.Driver;
 using Programa.Infra.Interfaces;
+using MongoDB.Driver.Linq;
+
+namespace Programa.Infra;
 
 public class MongoDbDriver<T> : IPersistencia<T>
 {
@@ -28,14 +31,13 @@ public class MongoDbDriver<T> : IPersistencia<T>
 
     public async Task<T> BuscarPorId(string id)
     {
-        throw new NotImplementedException();
+        return await this.mongoCollection().AsQueryable().Where(p => ((ICollectionMongoDb)p).Id == id).FirstAsync();
     }
 
     public async Task Excluir(T objeto)
     {
-        throw new NotImplementedException();
+        await this.mongoCollection().DeleteOneAsync(p => ((ICollectionMongoDb)p).Id == ((ICollectionMongoDb)objeto).Id);
     }
-
     public async Task Salvar(T objeto)
     {
         throw new NotImplementedException();
@@ -48,6 +50,11 @@ public class MongoDbDriver<T> : IPersistencia<T>
 
     public async Task ExcluirTudo()
     {
-        throw new NotImplementedException();
+        foreach(var obj in await Todos())
+        {
+            if(obj == null) continue;
+            var objContrato = (ICollectionMongoDb)obj;
+            await this.mongoCollection().DeleteOneAsync(p => ((ICollectionMongoDb)p).Id == objContrato.Id); 
+        }
     }
 }
