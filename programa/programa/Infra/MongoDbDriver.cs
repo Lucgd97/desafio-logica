@@ -3,6 +3,7 @@ using System.Text.Json;
 using MongoDB.Driver;
 using Programa.Infra.Interfaces;
 using MongoDB.Driver.Linq;
+using MongoDB.Bson;
 
 namespace Programa.Infra;
 
@@ -31,7 +32,7 @@ public class MongoDbDriver<T> : IPersistencia<T>
 
     public async Task<T> BuscarPorId(string id)
     {
-        return await this.mongoCollection().AsQueryable().Where(p => ((ICollectionMongoDb)p).Id == id).FirstAsync();
+        return await this.mongoCollection().AsQueryable().Where(p => ((ICollectionMongoDb)p).Id == ObjectId.Parse(id)).FirstAsync();
     }
 
     public async Task Excluir(T objeto)
@@ -40,7 +41,12 @@ public class MongoDbDriver<T> : IPersistencia<T>
     }
     public async Task Salvar(T objeto)
     {
-        throw new NotImplementedException();
+        {
+            ObjectId id = ((ICollectionMongoDb)objeto).Id;
+            var objDb = await BuscarPorId(id.ToString());
+            if(objDb == null) await this.mongoCollection().InsertOneAsync(objeto);
+            else await this.mongoCollection().ReplaceOneAsync(c => ((ICollectionMongoDb)c).Id == ((ICollectionMongoDb)objeto).Id, objeto);
+        }       
     }
 
     public async Task<List<T>> Todos()

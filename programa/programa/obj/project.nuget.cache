@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rCeAt0mJnyTdchdm2YIeKgqPm9UEsWXO4IB3uzseZrIc7bBPEG0jtfxemWCKv5ff+3vDg4MMgQWsGtJrQN0lIQ==",
+  "dgSpecHash": "WKc6/cKdHCr+iyGbaM9vAlYm8LXH0Z5sq5QdHvmqtaWxATjlxmJHzeFwcIycBX83bQKd/kW1+7fcOJxcMjw3IA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
+  "projectFilePath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\programa\\programa\\Programa.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucas\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\lucas\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

@@ -1,6 +1,8 @@
+using MongoDB.Bson;
+
 namespace Programa.Infra.Interfaces;
 
 public interface ICollectionMongoDb
 {
-    string Id{ get;set; }    
+    ObjectId Id{ get;set; }    
 }

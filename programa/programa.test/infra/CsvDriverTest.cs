@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Programa.Models;
 
-namespace Programa.Infra;
+namespace Programa.Test.Infra;
 
 [TestClass]
 public class CsvDriverTest

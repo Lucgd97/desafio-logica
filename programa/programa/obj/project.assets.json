@@ -795,11 +795,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
+      "projectUniqueName": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\programa\\programa\\Programa.csproj",
       "projectName": "Programa",
-      "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\Programa.csproj",
+      "projectPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\programa\\programa\\Programa.csproj",
       "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\Programa\\programa\\obj\\",
+      "outputPath": "C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Alura\\C# Danilo\\desafio-logica\\Programa-Desafio-Logica\\programa\\programa\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -855,7 +855,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }
